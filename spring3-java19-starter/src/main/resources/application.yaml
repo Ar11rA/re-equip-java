@@ -10,4 +10,6 @@ springdoc:
   api-docs:
     path: /info
     enabled: true
+server:
+  port: 8081
 

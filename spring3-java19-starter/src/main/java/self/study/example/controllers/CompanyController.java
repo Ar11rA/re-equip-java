@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController()
 @RequestMapping("company")
-public class OverviewController {
+public class CompanyController {
 
     @Autowired
     private CompanyRepository _companyRepository;
@@ -20,7 +20,7 @@ public class OverviewController {
     }
 
     @PostMapping("")
-    public void GetOverview(@RequestBody() Company company) {
+    public void SaveCompany(@RequestBody() Company company) {
         _companyRepository.save(company);
     }
 }
