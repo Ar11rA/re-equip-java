@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 public class FluxExample {
-    private static Flux<Integer> getNumbers() {
+    public static Flux<Integer> getNumbers() {
         System.out.println("Invoking Get Numbers...");
         return Flux
                 .fromIterable(Arrays.asList(1, 2, 3, 4))

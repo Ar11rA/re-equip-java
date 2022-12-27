@@ -15,7 +15,7 @@ public class CombiningExample {
         // 1. concat
         Flux<String> concatenated = Flux.concat(f1, f2); // concatDelayError -> f3 error comes in end
         concatenated.subscribe(Utility.onNext());
-
+        
         // 2. merge
         Flux<String> merged = Flux.merge(f1, f2);
         merged.subscribe(Utility.onNext());
@@ -24,6 +24,10 @@ public class CombiningExample {
         Flux<Tuple2<String, String>> zipped = Flux.zip(f1, f2);
         zipped.subscribe(Utility.onNext());
 
-        Thread.sleep(3000);
+        // 4. zip with
+        Flux<String> resultZipWith = f1.zipWith(f2, (a, b) -> a + b);
+        resultZipWith.subscribe(Utility.onNext());
+
+        Thread.sleep(5000);
     }
 }

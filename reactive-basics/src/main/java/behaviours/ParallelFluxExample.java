@@ -43,7 +43,7 @@ public class ParallelFluxExample {
         System.out.println("Parallel: " + new Date());
         Flux
           .range(1, 100)
-          .parallel(3)
+          .parallel(3) // for cpu intensive tasks, use BoundedElastic for n/w or db calls
           .runOn(Schedulers.parallel())
           .filter(ParallelFluxExample::isPrime)
           .subscribe();

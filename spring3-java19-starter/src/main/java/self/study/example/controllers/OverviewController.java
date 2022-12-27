@@ -1,9 +1,7 @@
 package self.study.example.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import self.study.example.entities.Company;
 import self.study.example.repositories.CompanyRepository;
 
@@ -19,5 +17,10 @@ public class OverviewController {
     @GetMapping("/overview")
     public List<Company> GetOverview() {
         return _companyRepository.findAll();
+    }
+
+    @PostMapping("")
+    public void GetOverview(@RequestBody() Company company) {
+        _companyRepository.save(company);
     }
 }
