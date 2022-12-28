@@ -3,7 +3,7 @@ package self.study.example.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import self.study.example.entities.Company;
-import self.study.example.repositories.CompanyRepository;
+import self.study.example.services.CompanyService;
 
 import java.util.List;
 
@@ -12,15 +12,15 @@ import java.util.List;
 public class CompanyController {
 
     @Autowired
-    private CompanyRepository _companyRepository;
+    private CompanyService _companyService;
 
     @GetMapping("/overview")
     public List<Company> GetOverview() {
-        return _companyRepository.findAll();
+        return _companyService.getOverview();
     }
 
     @PostMapping("")
-    public void SaveCompany(@RequestBody() Company company) {
-        _companyRepository.save(company);
+    public Company SaveCompany(@RequestBody() Company company) {
+        return _companyService.saveCompany(company);
     }
 }
