@@ -23,6 +23,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation group: 'org.springframework.data', name: 'spring-data-r2dbc', version: '3.0.0'
     implementation group: 'io.r2dbc', name: 'r2dbc-postgresql', version: '0.8.13.RELEASE'
+    // https://mvnrepository.com/artifact/io.netty/netty-resolver-dns-native-macos
+    implementation group: 'io.netty', name: 'netty-resolver-dns-native-macos', version: '4.1.86.Final', classifier: 'osx-aarch_64'
     compileOnly 'org.projectlombok:lombok'
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'

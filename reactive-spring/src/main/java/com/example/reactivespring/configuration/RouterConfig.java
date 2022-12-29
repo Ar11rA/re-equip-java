@@ -13,6 +13,7 @@ public class RouterConfig {
 
     @Autowired
     private CompanyHandler _companyHandler;
+
     @Bean
     public RouterFunction<ServerResponse> routes() {
         return RouterFunctions.route()
@@ -26,6 +27,8 @@ public class RouterConfig {
           .GET("overview/parallel", serverRequest -> _companyHandler.GetOverviewParallel())
           .GET("overview/sequential", serverRequest -> _companyHandler.GetOverviewSequential())
           .GET("overview/stream", serverRequest -> _companyHandler.GetStream())
+          .GET("list/{limit}/parallel", _companyHandler::GetCompaniesExternal)
+          .GET("list/{limit}/sequential", _companyHandler::GetCompaniesExternalSeq)
           .POST("", _companyHandler::SaveCompany)
           .build();
     }
