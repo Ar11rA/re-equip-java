@@ -1,6 +1,5 @@
 package self.study.example.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import self.study.example.clients.CompanyClient;
 import self.study.example.dto.CompanyExternalDTO;
@@ -18,11 +17,15 @@ import java.util.stream.IntStream;
 
 @Service
 public class CompanyService {
-    @Autowired
+
     private CompanyRepository _companyRepository;
 
-    @Autowired
     private CompanyClient _companyClient;
+
+    public CompanyService(CompanyRepository _companyRepository, CompanyClient _companyClient) {
+        this._companyRepository = _companyRepository;
+        this._companyClient = _companyClient;
+    }
 
     // writing this way for delay simulation
     public List<Company> getOverview() {

@@ -13,16 +13,21 @@ import reactor.core.publisher.ParallelFlux;
 import reactor.core.publisher.SynchronousSink;
 import reactor.core.scheduler.Schedulers;
 
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.function.BiFunction;
 
 @Service
 public class CompanyService {
-    @Autowired
+
     private CompanyRepository _companyRepository;
 
-    @Autowired
     private CompanyClient _companyClient;
+
+    public CompanyService(CompanyRepository _companyRepository, CompanyClient _companyClient) {
+        this._companyRepository = _companyRepository;
+        this._companyClient = _companyClient;
+    }
 
     // writing this way for delay simulation
     public Flux<Company> getOverviewParallel() {
@@ -99,6 +104,7 @@ public class CompanyService {
             }
             return state + 1;
         };
-        return Flux.generate(() -> 1, generator);
+        Callable<Integer> state = () -> 1;
+        return Flux.generate(state, generator);
     }
 }
