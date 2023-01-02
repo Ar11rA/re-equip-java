@@ -45,12 +45,12 @@ public class OperatorsExample {
         // 4. flatmap
         // w/o flatmap
         Flux
-          .range(1,5)
+          .range(1, 5)
           .map(i -> getExampleListOfObjects(i))
           .subscribe(Utility.onNext());
         // with flatmap -> when you have return type as flux / mono
         Flux
-          .range(1,5)
+          .range(1, 5)
           .flatMap(i -> getExampleListOfObjects(i))
           .map(pojo -> pojo.field2)
           .subscribe(Utility.onNext());

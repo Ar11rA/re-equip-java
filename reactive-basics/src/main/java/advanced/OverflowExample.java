@@ -8,12 +8,12 @@ public class OverflowExample {
     public static void main(String[] args) throws InterruptedException {
         Flux
           .create(fluxSink -> {
-            for (int i = 1; i <= 500; i++) {
-                fluxSink.next(i);
-                System.out.println("Pushed: " + i);
-            }
-            fluxSink.complete();
-        })
+              for (int i = 1; i <= 500; i++) {
+                  fluxSink.next(i);
+                  System.out.println("Pushed: " + i);
+              }
+              fluxSink.complete();
+          })
           .onBackpressureDrop() // onBackpressureDrop / Latest / Buffer
           .publishOn(Schedulers.boundedElastic())
           .doOnNext(i -> {

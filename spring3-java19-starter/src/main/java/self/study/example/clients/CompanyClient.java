@@ -1,6 +1,5 @@
 package self.study.example.clients;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -11,8 +10,11 @@ import java.util.concurrent.CompletableFuture;
 @Component
 public class CompanyClient {
 
-    @Autowired
-    private RestTemplate _restTemplate;
+    private final RestTemplate _restTemplate;
+
+    public CompanyClient(RestTemplate _restTemplate) {
+        this._restTemplate = _restTemplate;
+    }
 
     @Async
     public CompletableFuture<CompanyExternalDTO> getCompany(int id) {

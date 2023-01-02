@@ -15,7 +15,7 @@ public class CombiningExample {
         // 1. concat
         Flux<String> concatenated = Flux.concat(f1, f2); // concatDelayError -> f3 error comes in end
         concatenated.subscribe(Utility.onNext());
-        
+
         // 2. merge
         Flux<String> merged = Flux.merge(f1, f2);
         merged.subscribe(Utility.onNext());

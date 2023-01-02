@@ -1,7 +1,6 @@
 package com.example.reactivespring.clients;
 
 import com.example.reactivespring.dto.CompanyExternalDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -9,8 +8,11 @@ import reactor.core.publisher.Mono;
 @Component
 public class CompanyClient {
 
-    @Autowired
-    private WebClient _webClient;
+    private final WebClient _webClient;
+
+    public CompanyClient(WebClient _webClient) {
+        this._webClient = _webClient;
+    }
 
     public Mono<CompanyExternalDTO> getCompany(int id) {
         return _webClient

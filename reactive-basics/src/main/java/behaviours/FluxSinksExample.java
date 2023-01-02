@@ -18,13 +18,13 @@ public class FluxSinksExample {
         }).subscribe(Utility.onNext());
 
         Flux.generate(() -> 1,
-                (state, synchronousSink) -> {
-            synchronousSink.next(4);
-            // allowed to emit only 1 data -> synchronousSink.next(2); -> error
-            if (state == 5) {
-                synchronousSink.complete();
-            }
-            return state + 1;
-        }).subscribe(Utility.onNext());
+          (state, synchronousSink) -> {
+              synchronousSink.next(4);
+              // allowed to emit only 1 data -> synchronousSink.next(2); -> error
+              if (state == 5) {
+                  synchronousSink.complete();
+              }
+              return state + 1;
+          }).subscribe(Utility.onNext());
     }
 }

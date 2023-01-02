@@ -5,7 +5,6 @@ import com.example.reactivespring.dto.CompanyExternalDTO;
 import com.example.reactivespring.entities.Company;
 import com.example.reactivespring.repositories.CompanyRepository;
 import com.example.reactivespring.utilities.TimeUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -39,7 +38,8 @@ public class CompanyService {
               TimeUtils.sleep(id);
               return _companyRepository.findById(id);
           })
-          .sequential();
+          .sequential()
+          .log();
     }
 
     public Flux<Company> getOverviewSequential() {
