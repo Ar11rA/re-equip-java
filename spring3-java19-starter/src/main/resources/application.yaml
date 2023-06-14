@@ -1,8 +1,12 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://localhost:5432/sample_db
     username: postgres
-    password: pass1234
+    password: root
+  application:
+    name: intro-spring-data-redis
+  redis:
+    url: redis://localhost:6379
 springdoc:
   swagger-ui:
     path: /docs
