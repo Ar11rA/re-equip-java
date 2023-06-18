@@ -10,17 +10,18 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import self.study.example.clients.CompanyClient;
+import self.study.example.dto.CompanyExternalDTO;
 import self.study.example.entities.Company;
 import self.study.example.repositories.CompanyRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
 @ExtendWith(MockitoExtension.class)
 public class CompanyServiceTest {
 
@@ -40,12 +41,23 @@ public class CompanyServiceTest {
         _companyService = new CompanyService(_companyRepository, _companyClient);
     }
     @Test
-    void getOverviewSeq_Success() {
+    void getOverviewDb_Success() {
         Company company = new Company();
         company.setId(1);
         company.setName("ABC");
         when(_companyRepository.findById(anyInt())).thenReturn(Optional.of(company));
         List<Company> companies = _companyService.getOverview();
         Assertions.assertEquals(4, companies.size());
+    }
+
+    @Test
+    void getOverviewExternal_Success() {
+        CompanyExternalDTO company = new CompanyExternalDTO();
+        company.setId("1");
+        company.setName("ABC");
+        CompletableFuture companyCompletableFuture = CompletableFuture.completedFuture(company);
+        when(_companyClient.getCompany(anyInt())).thenReturn(companyCompletableFuture);
+        List<CompanyExternalDTO> companies = _companyService.getCompaniesExternalSeq(1);
+        Assertions.assertEquals(1, companies.size());
     }
 }

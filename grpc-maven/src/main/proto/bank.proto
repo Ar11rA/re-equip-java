@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "org.example.models";
+
+// proto for balance
+message Balance {
+  int64 amount = 1;
+}
+
+// proto for account
+message Account {
+  int32 id = 1;
+  string name = 2;
+  Balance balance = 3;
+}
+
+// proto for get account request
+message GetAccountRequest {
+  int32 id = 1;
+}
+
+// proto for create account request
+message CreateAccountRequest {
+  string name = 1;
+}
+
+// proto for Deposit request
+message DepositRequest {
+  int32 id = 1;
+  int64 amount = 2;
+}
+
+// proto for Withdraw request
+message WithdrawRequest {
+  int32 id = 1;
+  int64 amount = 2;
+}
+
+// service for bank
+service BankService {
+  rpc GetAccount (GetAccountRequest) returns (Account);
+  rpc CreateAccount (CreateAccountRequest) returns (Account);
+  rpc Deposit (DepositRequest) returns (Account);
+  rpc Withdraw (WithdrawRequest) returns (Account);
+  rpc WithdrawStream (WithdrawRequest) returns (stream Account);
+}
+
+// mock service
+service MockService {
+  rpc GetBalance(GetAccountRequest) returns (Balance);
+}
