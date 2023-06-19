@@ -8,6 +8,20 @@
 6. Understanding latest Java updates
 7. Building sample micro services
 
+## Project structure
+
+```sh
+├── dsa-cp: Basic data structure and algo based problems in Java.
+├── grpc-client: Client code to call grpc based servers
+├── grpc-gradle: Gradle based grpc server
+├── grpc-maven: Maven based grpc server
+├── reactive-basics: Basic reactive code using ProjectReactor
+├── reactive-spring: Reactive code in spring using ProjectReactor
+├── spring3-java19-blockchain: Blockchain basic implementation in core Java
+├── spring3-java19-grpc: Spring based grpc implementation
+└── spring3-java19-starter: Spring starter kit showing how to structure microservice code with proper unit tests
+```
+
 ## Why?
 
 ### Why Java 19?
