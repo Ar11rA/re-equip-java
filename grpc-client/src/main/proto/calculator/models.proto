@@ -14,7 +14,7 @@ message PrimeNumberDecompositionRequest {
 }
 
 message PrimeNumberDecompositionResponse {
-  int64 prime_factor = 1;
+  int64 primeFactor = 1;
 }
 
 message ComputeAverageRequest {
@@ -35,11 +35,4 @@ message FindMaximumResponse {
 
 message SumResponse {
   int32 result = 1;
-}
-
-service CalculatorService {
-  rpc Sum(SumRequest) returns (SumResponse);
-  rpc GetPrimeFactors(PrimeNumberDecompositionRequest) returns (stream PrimeNumberDecompositionResponse);
-  rpc GetAverage(stream ComputeAverageRequest) returns (ComputeAverageResponse);
-  rpc GetMax(stream FindMaximumRequest) returns (stream FindMaximumResponse);
 }

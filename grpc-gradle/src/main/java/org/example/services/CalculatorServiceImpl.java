@@ -58,6 +58,7 @@ public class CalculatorServiceImpl extends CalculatorServiceGrpc.CalculatorServi
     public StreamObserver<FindMaximumRequest> getMax(StreamObserver<FindMaximumResponse> responseObserver) {
         StreamObserver<FindMaximumRequest> stream = new StreamObserver<FindMaximumRequest>() {
             int max = -1;
+
             @Override
             public void onNext(FindMaximumRequest request) {
                 if (request.getNumber() > max) {
@@ -77,5 +78,20 @@ public class CalculatorServiceImpl extends CalculatorServiceGrpc.CalculatorServi
             }
         };
         return stream;
+    }
+
+    @Override
+    public void squareRoot(SquareRootRequest request, StreamObserver<SquareRootResponse> responseObserver) {
+        if (request.getNumber() < 0) {
+            responseObserver.onError(io.grpc.Status.INVALID_ARGUMENT
+              .withDescription("The number being sent is not positive")
+              .augmentDescription("Number sent: " + request.getNumber())
+              .asRuntimeException()
+            );
+        } else {
+            double numberRoot = Math.sqrt(request.getNumber());
+            responseObserver.onNext(SquareRootResponse.newBuilder().setNumberRoot(numberRoot).build());
+            responseObserver.onCompleted();
+        }
     }
 }

@@ -1,7 +1,6 @@
 package org.example;
 
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
+import io.grpc.*;
 import io.grpc.stub.StreamObserver;
 import org.example.calculator.*;
 import org.example.greeting.GreetingRequest;
@@ -12,9 +11,59 @@ import org.example.greeting.GreetingServiceGrpc;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 
 public class Main {
+
+    private static void GreetingClientWithDeadlineRetry(ManagedChannel channel, int maxRetries, int initialBackoffMillis) {
+        int retryCount = 1;
+        int backoffMillis = initialBackoffMillis;
+
+        while (retryCount <= maxRetries) {
+            GreetingServiceGrpc.GreetingServiceBlockingStub stub = GreetingServiceGrpc.newBlockingStub(channel);
+            try {
+                GreetingResponse response = stub
+                  .withDeadline(Deadline.after(2, TimeUnit.SECONDS))
+                  .greetWithDeadlineAndRetry(GreetingRequest.newBuilder()
+                    .setFirstName("John")
+                    .setLastName("Doe")
+                    .build());
+                System.out.println(response.getGreeting());
+                return;
+            } catch (StatusRuntimeException exception) {
+                System.out.println("Exception: " + exception.getStatus());
+                if (exception.getStatus().getCode().equals(Status.Code.DEADLINE_EXCEEDED)) {
+                    System.out.println("Timeout!!!");
+
+                    // Check if it's appropriate to retry
+                    if (!isRetryable(exception) || retryCount >= maxRetries) {
+                        System.out.println("Maximum retries reached or non-retryable error. Aborting.");
+                        return;
+                    }
+
+                    // Exponential backoff before retrying
+                    try {
+                        System.out.println("Exponential backoff: " + backoffMillis + "with retry count: " + retryCount);
+                        Thread.sleep(backoffMillis);
+                    } catch (InterruptedException ignored) {
+                    }
+
+                    backoffMillis *= 2;
+                    retryCount++;
+                }
+            }
+        }
+    }
+
+    private static boolean isRetryable(StatusRuntimeException e) {
+        Status.Code statusCode = e.getStatus().getCode();
+        // Check if the error code is retryable
+        return switch (statusCode) {
+            case UNAVAILABLE, DEADLINE_EXCEEDED, ABORTED -> true;
+            default -> false;
+        };
+    }
 
     private static void GreetingClient(ManagedChannel channel) throws InterruptedException {
         GreetingServiceGrpc.GreetingServiceBlockingStub stub = GreetingServiceGrpc.newBlockingStub(channel);
@@ -145,6 +194,7 @@ public class Main {
         maxRequestStream.onCompleted();
         latch.await(10, java.util.concurrent.TimeUnit.SECONDS);
     }
+
     public static void main(String[] args) throws InterruptedException {
         int port = 50051;
         ManagedChannel channel = ManagedChannelBuilder
@@ -153,6 +203,7 @@ public class Main {
           .build();
         GreetingClient(channel);
         CalculatorClient(channel);
+        GreetingClientWithDeadlineRetry(channel, 3, 1000);
         channel.shutdown();
     }
 }

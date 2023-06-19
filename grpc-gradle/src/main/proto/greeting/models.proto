@@ -19,10 +19,3 @@ message GreetingResponse {
 message GreetingResponses {
   repeated string greeting = 1;
 }
-
-service GreetingService {
-  rpc greet(GreetingRequest) returns (GreetingResponse);
-  rpc greetMany(GreetingRequest) returns (stream GreetingResponse);
-  rpc greetDifferent(stream GreetingRequest) returns (GreetingResponses);
-  rpc greetOneByOne(stream GreetingRequest) returns (stream GreetingResponse);
-}

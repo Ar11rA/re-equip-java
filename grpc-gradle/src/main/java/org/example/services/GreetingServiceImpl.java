@@ -1,23 +1,30 @@
 package org.example.services;
 
+import io.grpc.Context;
+import io.grpc.Deadline;
 import io.grpc.stub.StreamObserver;
-import org.example.greeting.*;
+import org.example.greeting.GreetingRequest;
+import org.example.greeting.GreetingResponse;
+import org.example.greeting.GreetingResponses;
+import org.example.greeting.GreetingServiceGrpc;
+
+import java.util.concurrent.TimeUnit;
 
 public class GreetingServiceImpl extends GreetingServiceGrpc.GreetingServiceImplBase {
     @Override
     public void greet(GreetingRequest request, StreamObserver<GreetingResponse> responseObserver) {
-       String finalGreeting = String.format("Hi %s %s!", request.getFirstName(), request.getLastName());
-       GreetingResponse response = GreetingResponse.newBuilder()
-         .setGreeting(finalGreeting)
-         .build();
-       responseObserver.onNext(response);
-       responseObserver.onCompleted();
+        String finalGreeting = String.format("Hi %s %s!", request.getFirstName(), request.getLastName());
+        GreetingResponse response = GreetingResponse.newBuilder()
+          .setGreeting(finalGreeting)
+          .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     @Override
     public void greetMany(GreetingRequest request, StreamObserver<GreetingResponse> responseObserver) {
         String finalGreeting = String.format("Hi %s %s!", request.getFirstName(), request.getLastName());
-        for(int i = 0; i < request.getLimit(); i++) {
+        for (int i = 0; i < request.getLimit(); i++) {
             GreetingResponse response = GreetingResponse.newBuilder()
               .setGreeting(finalGreeting)
               .build();
@@ -74,4 +81,22 @@ public class GreetingServiceImpl extends GreetingServiceGrpc.GreetingServiceImpl
         };
         return stream;
     }
+
+    @Override
+    public void greetWithDeadlineAndRetry(GreetingRequest request, StreamObserver<GreetingResponse> responseObserver) {
+        int randomDelayInSeconds = (int) (Math.random() * 5);
+        System.out.println("Sleeping for " + randomDelayInSeconds + " seconds");
+        try {
+            Thread.sleep(randomDelayInSeconds * 1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        String finalGreeting = String.format("Hi %s %s!", request.getFirstName(), request.getLastName());
+        GreetingResponse response = GreetingResponse.newBuilder()
+          .setGreeting(finalGreeting)
+          .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
 }
