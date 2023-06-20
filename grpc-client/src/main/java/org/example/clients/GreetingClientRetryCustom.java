@@ -53,7 +53,7 @@ public class GreetingClientRetryCustom {
         Status.Code statusCode = e.getStatus().getCode();
         // Check if the error code is retryable
         return switch (statusCode) {
-            case UNAVAILABLE, DEADLINE_EXCEEDED, ABORTED -> true;
+                case UNAVAILABLE, DEADLINE_EXCEEDED, ABORTED -> true;
             default -> false;
         };
     }

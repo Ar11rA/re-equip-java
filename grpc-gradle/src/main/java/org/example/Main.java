@@ -2,6 +2,7 @@ package org.example;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+import org.example.config.LoggingInterceptor;
 import org.example.services.CalculatorServiceImpl;
 import org.example.services.GreetingServiceImpl;
 
@@ -14,6 +15,7 @@ public class Main {
           .forPort(port)
           .addService(new GreetingServiceImpl())
           .addService(new CalculatorServiceImpl())
+          .intercept(new LoggingInterceptor())
           .build();
         server.start();
         System.out.println("Server started on port " + port);
