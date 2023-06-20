@@ -99,4 +99,3 @@
 - Udemy: https://www.udemy.com/course/reactive-programming-in-modern-java-using-project-reactor/
 - Project Reactor: https://projectreactor.io/docs/core/release/reference/
 - Spring 6 and springboot 3: https://spring.io/projects/spring-boot
-
