@@ -14,10 +14,30 @@ repositories {
 }
 
 dependencies {
+    // grpc libs
     runtimeOnly 'io.grpc:grpc-netty-shaded:1.56.0'
+    runtimeOnly 'io.grpc:grpc-core:1.56.0'
     implementation 'io.grpc:grpc-protobuf:1.56.0'
     implementation 'io.grpc:grpc-stub:1.56.0'
+    implementation 'io.grpc:grpc-netty:1.56.0'
+    implementation 'io.perfmark:perfmark-api:0.25.0'
+
+    // dynamo db
+    implementation 'software.amazon.awssdk:dynamodb:2.20.91'
+    implementation 'software.amazon.awssdk:aws-sdk-java:2.20.91'
+    implementation 'software.amazon.awssdk:apache-client:2.20.91'
+
+    // logging
+    implementation 'org.slf4j:slf4j-api:2.0.6'
+    implementation 'org.slf4j:slf4j-simple:2.0.6'
+
+    // db
+    implementation 'org.hibernate:hibernate-core:5.6.15.Final'
+    implementation 'org.postgresql:postgresql:42.5.1'
+
     compileOnly 'org.apache.tomcat:annotations-api:6.0.53'
+
+    // tests
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
@@ -42,4 +62,19 @@ protobuf {
 
 test {
     useJUnitPlatform()
+}
+
+mainClassName = 'org.example.Main'
+
+task bootJar(type: Jar) {
+    zip64 true
+    manifest {
+        attributes 'Main-Class': "${mainClassName}"
+    }
+    tasks.withType(Jar){
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    }
+    archiveBaseName = "${rootProject.name}"
+    from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }

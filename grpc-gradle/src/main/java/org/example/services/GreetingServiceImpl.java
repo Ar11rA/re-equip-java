@@ -1,14 +1,10 @@
 package org.example.services;
 
-import io.grpc.Context;
-import io.grpc.Deadline;
 import io.grpc.stub.StreamObserver;
 import org.example.greeting.GreetingRequest;
 import org.example.greeting.GreetingResponse;
 import org.example.greeting.GreetingResponses;
 import org.example.greeting.GreetingServiceGrpc;
-
-import java.util.concurrent.TimeUnit;
 
 public class GreetingServiceImpl extends GreetingServiceGrpc.GreetingServiceImplBase {
     @Override

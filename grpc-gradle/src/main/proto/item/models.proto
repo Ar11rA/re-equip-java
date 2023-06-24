@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package item;
+
+option java_package = "org.example.item";
+option java_multiple_files = true;
+
+message ItemFeatures {
+  int32 price = 1;
+  optional string color = 2;
+  optional string size = 3;
+  repeated string tags = 4;
+}
+
+message ItemDetails {
+  optional string id = 1;
+  string category = 2;
+  string name = 3;
+  string description = 4;
+}
+
+message CreateItemResponse {
+  string id = 1;
+}
+
+message ItemRequest {
+  string id = 1;
+  string category = 2;
+}

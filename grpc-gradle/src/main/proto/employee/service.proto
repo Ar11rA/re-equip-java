@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package calculator;
+
+option java_package = "org.example.employee";
+option java_multiple_files = true;
+
+import "employee/models.proto";
+
+service EmployeeService {
+    rpc GetEmployee(GetEmployeeRequest) returns (GetEmployeeResponse);
+    rpc CreateEmployee(CreateEmployeeRequest) returns (CreateEmployeeResponse);
+}
