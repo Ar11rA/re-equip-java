@@ -7,6 +7,7 @@ spring:
     name: intro-spring-data-redis
   redis:
     url: redis://localhost:6379
+    password: password123
 springdoc:
   swagger-ui:
     path: /docs

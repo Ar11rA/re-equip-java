@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package item;
+
+option java_package = "org.example.item";
+option java_multiple_files = true;
+
+import "item/models.proto";
+
+service ItemService {
+  rpc CreateItem(ItemDetails) returns (CreateItemResponse);
+  rpc GetItem(ItemRequest) returns (ItemDetails);
+}

@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package calculator;
+
+option java_package = "org.example.employee";
+option java_multiple_files = true;
+
+message CreateEmployeeRequest {
+  string name = 1;
+  string role = 2;
+}
+
+message CreateEmployeeResponse {
+  int32 id = 1;
+}
+
+message GetEmployeeRequest {
+  int32 id = 1;
+}
+
+message GetEmployeeResponse {
+  int32 id = 1;
+  string name = 2;
+  string role = 3;
+}

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package calculator;
+
+option java_package = "org.example.calculator";
+option java_multiple_files = true;
+
+import "calculator/models.proto";
+
+service CalculatorService {
+  rpc Sum(SumRequest) returns (SumResponse);
+  rpc GetPrimeFactors(PrimeNumberDecompositionRequest) returns (stream PrimeNumberDecompositionResponse);
+  rpc GetAverage(stream ComputeAverageRequest) returns (ComputeAverageResponse);
+  rpc GetMax(stream FindMaximumRequest) returns (stream FindMaximumResponse);
+  rpc SquareRoot(SquareRootRequest) returns (SquareRootResponse);
+}

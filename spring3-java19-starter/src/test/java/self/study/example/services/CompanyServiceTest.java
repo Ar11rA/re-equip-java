@@ -26,7 +26,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest
 @ExtendWith(MockitoExtension.class)
 public class CompanyServiceTest {
 
@@ -46,7 +45,7 @@ public class CompanyServiceTest {
         _companyService = new CompanyService(_companyRepository, _companyClient);
     }
     @Test
-    void getOverviewSeq_Success() {
+    void getOverviewDb_Success() {
         Company company = new Company();
         company.setId(1);
         company.setName("ABC");

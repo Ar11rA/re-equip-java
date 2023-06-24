@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "org.example.models";
+
+// person proto with name and age
+message Person {
+  string name = 1;
+  int32 age = 2;
+  Address address = 3;
+  Job job = 4;
+}
+
+// address proto with street and city
+message Address {
+  string street = 1;
+  string city = 2;
+}
+
+// job proto with job title and salary
+message Job {
+  string title = 1;
+  int32 salary = 2;
+}
+
+// company proto with company name and List of person hashmap
+message Company {
+  map<string, Person> employees = 1;
+  CompanyType type = 2;
+}
+
+// enum for company type
+enum CompanyType {
+  PRIVATE = 0;
+  PUBLIC = 1;
+  UNKNOWN = 2;
+}
