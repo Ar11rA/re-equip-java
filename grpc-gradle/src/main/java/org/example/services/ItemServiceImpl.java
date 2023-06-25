@@ -1,5 +1,6 @@
 package org.example.services;
 
+import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 import org.example.item.*;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
@@ -64,6 +65,13 @@ public class ItemServiceImpl extends ItemServiceGrpc.ItemServiceImplBase {
         Map<String, AttributeValue> returnedItem = this.dynamoDbClient
           .getItem(getItemRequest)
           .item();
+
+        if (returnedItem.isEmpty()) {
+            responseObserver.onError(Status.NOT_FOUND
+              .withDescription("Item with id " + request.getId() + " not found")
+              .asRuntimeException());
+            return;
+        }
 
         // 4. Parse and send response to grpc client
         responseObserver.onNext(ItemDetails.newBuilder()
