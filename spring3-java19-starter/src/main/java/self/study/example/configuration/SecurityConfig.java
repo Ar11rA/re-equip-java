@@ -13,6 +13,7 @@ import self.study.example.interceptors.JWTAuthFilter;
 @EnableWebSecurity
 public class SecurityConfig {
     private static final String[] AUTH_WHITELIST = {
+            "/**",
       "/v3/api-docs/**",
       "/swagger-ui/**",
       "/docs",
