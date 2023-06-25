@@ -1,5 +1,20 @@
 # Modern Java
 
+- [Modern Java](#modern-java)
+  - [Objective](#objective)
+  - [Project structure](#project-structure)
+  - [Why?](#why)
+    - [Why Java 19?](#why-java-19)
+    - [Why explore Reactive Java?](#why-explore-reactive-java)
+      - [Advantages](#advantages)
+      - [Disadvantages](#disadvantages)
+      - [Difference between Servlet and WebFlux](#difference-between-servlet-and-webflux)
+    - [Why explore Grpc?](#why-explore-grpc)
+      - [Topics](#topics)
+  - [Sources](#sources)
+
+## Objective
+
 1. Setting up a Java 19 spring-boot 3 project
 2. Understanding Reactive Java
 3. Setting up a Java 19 spring flux project
@@ -7,8 +22,15 @@
 5. Setting up grpc clients
 6. Understanding latest Java updates
 7. Building sample micro services
+8. Integrating with external services, examples included:
+   - AWS Dynamo DB
+   - Postgres
+   - Redis
+   - S3
 
 ## Project structure
+
+Why so many folders? Here's why:
 
 ```sh
 ├── dsa-cp: Basic data structure and algo based problems in Java.
@@ -99,3 +121,4 @@
 - Udemy: https://www.udemy.com/course/reactive-programming-in-modern-java-using-project-reactor/
 - Project Reactor: https://projectreactor.io/docs/core/release/reference/
 - Spring 6 and springboot 3: https://spring.io/projects/spring-boot
+- Stephane Marek courses for GRPC: https://www.youtube.com/channel/UCGWZY-0pONnKmF98dhZy9CQ

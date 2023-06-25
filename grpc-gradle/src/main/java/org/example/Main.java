@@ -10,13 +10,9 @@ import org.example.services.EmployeeServiceImpl;
 import org.example.services.GreetingServiceImpl;
 import org.example.services.ItemServiceImpl;
 import org.hibernate.Session;
-import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
-import software.amazon.awssdk.services.dynamodb.model.ScanRequest;
-import software.amazon.awssdk.services.dynamodb.model.ScanResponse;
 
 import java.io.IOException;
-import java.net.URI;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {

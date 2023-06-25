@@ -27,3 +27,7 @@ message ItemRequest {
   string id = 1;
   string category = 2;
 }
+
+message SearchItemRequest {
+  string name = 1;
+}

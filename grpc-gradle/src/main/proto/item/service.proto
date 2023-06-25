@@ -10,4 +10,5 @@ import "item/models.proto";
 service ItemService {
   rpc CreateItem(ItemDetails) returns (CreateItemResponse);
   rpc GetItem(ItemRequest) returns (ItemDetails);
+  rpc SearchItemsByName(SearchItemRequest) returns (stream ItemDetails);
 }
