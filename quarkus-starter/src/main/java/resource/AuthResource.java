@@ -2,9 +2,10 @@ package resource;
 
 import dto.LoginRequest;
 import dto.TokenResponse;
+import services.AuthService;
+
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
-import services.AuthService;
 
 @Path("/auth")
 public class AuthResource {

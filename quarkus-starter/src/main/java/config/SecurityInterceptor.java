@@ -2,6 +2,11 @@ package config;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
+
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import jakarta.annotation.security.DenyAll;
 import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
@@ -12,23 +17,17 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MultivaluedMap;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.Provider;
-
 import javax.annotation.Priority;
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import static constants.AppConstants.*;
 
 @Provider
 @Priority(1)
 public class SecurityInterceptor implements ContainerRequestFilter {
-    @Context
-    private ResourceInfo resourceInfo;
-
     private static final String AUTHORIZATION_PROPERTY = "Authorization";
     private static final String AUTHENTICATION_SCHEME = "Bearer";
+    @Context
+    private ResourceInfo resourceInfo;
 
     private boolean handleRoleCheck(DecodedJWT decodedToken, Method method) {
         String[] userRoles =

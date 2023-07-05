@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 public class GreetingServiceTest {
 
     private static GreetingService greetingService;
+
     @BeforeAll
     public static void setup() {
         greetingService = new GreetingService();

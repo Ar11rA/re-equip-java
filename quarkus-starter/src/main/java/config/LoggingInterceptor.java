@@ -1,14 +1,14 @@
 package config;
 
 import io.quarkus.logging.Log;
+
+import java.util.concurrent.TimeUnit;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerRequestFilter;
 import jakarta.ws.rs.container.ContainerResponseContext;
 import jakarta.ws.rs.container.ContainerResponseFilter;
 import jakarta.ws.rs.ext.Provider;
-
 import javax.annotation.Priority;
-import java.util.concurrent.TimeUnit;
 
 @Provider
 @Priority(2)

@@ -1,10 +1,10 @@
 package services;
 
-import jakarta.enterprise.context.ApplicationScoped;
 import models.Fruit;
 import repository.FruitRepository;
 
 import java.util.List;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class FruitService {

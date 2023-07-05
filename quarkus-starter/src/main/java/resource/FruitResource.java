@@ -1,14 +1,14 @@
 package resource;
 
+import models.Fruit;
+import services.FruitService;
+
+import java.util.List;
 import jakarta.annotation.security.PermitAll;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
-import models.Fruit;
-import services.FruitService;
-
-import java.util.List;
 
 @Path("/fruits")
 public class FruitResource {
