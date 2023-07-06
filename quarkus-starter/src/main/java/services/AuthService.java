@@ -1,8 +1,9 @@
 package services;
 
 import clients.AuthClient;
-import dto.LoginRequest;
-import dto.TokenResponse;
+import dto.req.LoginRequest;
+import dto.res.TokenResponse;
+import dto.res.TokenValidationResponse;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
@@ -35,6 +36,14 @@ public class AuthService {
         params.add("client_secret", clientSecret);
         params.add("password", loginRequest.getPassword());
         return authClient.authenticate(realm, params);
+    }
+
+    public TokenValidationResponse validate(String token) {
+        MultivaluedMap<String, String> params = new MultivaluedHashMap<>();
+        params.add("token", token);
+        params.add("client_id", clientId);
+        params.add("client_secret", clientSecret);
+        return authClient.validate(realm, params);
     }
 
 }

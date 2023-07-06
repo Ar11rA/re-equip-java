@@ -25,6 +25,13 @@ public class FruitResource {
         return fruitService.list();
     }
 
+    @GET
+    @Path("/{id}")
+    @PermitAll()
+    public Fruit findById(long id) {
+        return fruitService.findById(id);
+    }
+
     @POST
     @Transactional
     @PermitAll()

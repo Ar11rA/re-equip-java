@@ -1,6 +1,7 @@
 package clients;
 
-import dto.TokenResponse;
+import dto.res.TokenResponse;
+import dto.res.TokenValidationResponse;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import jakarta.ws.rs.Consumes;
@@ -17,4 +18,10 @@ public interface AuthClient {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     TokenResponse authenticate(@PathParam("realm") String realm,
                                MultivaluedMap<String, String> params);
+
+    @POST
+    @Path(value = "/realms/{realm}/protocol/openid-connect/token/introspect")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    TokenValidationResponse validate(@PathParam("realm") String realm,
+                                         MultivaluedMap<String, String> params);
 }

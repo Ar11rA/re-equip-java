@@ -1,6 +1,6 @@
 package clients;
 
-import dto.QuoteResponse;
+import dto.res.QuoteResponse;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import java.util.concurrent.CompletionStage;

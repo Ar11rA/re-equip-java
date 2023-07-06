@@ -1,7 +1,7 @@
 package resource;
 
-import dto.LoginRequest;
-import dto.TokenResponse;
+import dto.req.LoginRequest;
+import dto.res.TokenResponse;
 import services.AuthService;
 
 import jakarta.annotation.security.PermitAll;

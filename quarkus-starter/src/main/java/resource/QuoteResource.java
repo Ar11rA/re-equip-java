@@ -1,6 +1,6 @@
 package resource;
 
-import dto.QuoteResponse;
+import dto.res.QuoteResponse;
 import services.QuoteService;
 
 import java.util.List;

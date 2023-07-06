@@ -1,7 +1,7 @@
 package services;
 
 import clients.QuoteClient;
-import dto.QuoteResponse;
+import dto.res.QuoteResponse;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import java.util.List;

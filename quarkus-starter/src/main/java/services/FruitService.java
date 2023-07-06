@@ -1,5 +1,6 @@
 package services;
 
+import exceptions.HttpException;
 import models.Fruit;
 import repository.FruitRepository;
 
@@ -16,6 +17,14 @@ public class FruitService {
 
     public List<Fruit> list() {
         return fruitRepository.listAll();
+    }
+
+    public Fruit findById(long id) {
+        Fruit fruit =  fruitRepository.findById(id);
+        if (fruit == null) {
+            throw new HttpException("Fruit not found", 404);
+        }
+        return fruit;
     }
 
     public Fruit add(Fruit inputFruit) {
