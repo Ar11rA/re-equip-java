@@ -4,8 +4,10 @@ import clients.AuthClient;
 import dto.req.LoginRequest;
 import dto.res.TokenResponse;
 import dto.res.TokenValidationResponse;
+import exceptions.HttpException;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
+import org.jboss.resteasy.reactive.ClientWebApplicationException;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.core.MultivaluedHashMap;
@@ -35,7 +37,12 @@ public class AuthService {
         params.add("client_id", clientId);
         params.add("client_secret", clientSecret);
         params.add("password", loginRequest.getPassword());
-        return authClient.authenticate(realm, params);
+        try {
+            return authClient.authenticate(realm, params);
+        } catch (ClientWebApplicationException exception) {
+            throw new HttpException("Invalid Credentials",
+              exception.getResponse().getStatus());
+        }
     }
 
     public TokenValidationResponse validate(String token) {
