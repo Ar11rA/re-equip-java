@@ -18,8 +18,16 @@ message GetEmployeeRequest {
   int32 id = 1;
 }
 
+message GetEmployeeByRoleRequest {
+  string role = 1;
+}
+
 message GetEmployeeResponse {
   int32 id = 1;
   string name = 2;
   string role = 3;
+}
+
+message GetEmployeeListResponse {
+  repeated GetEmployeeResponse list = 1;
 }

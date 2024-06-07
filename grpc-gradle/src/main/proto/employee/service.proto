@@ -9,5 +9,6 @@ import "employee/models.proto";
 
 service EmployeeService {
     rpc GetEmployee(GetEmployeeRequest) returns (GetEmployeeResponse);
+    rpc GetEmployeeByRole(GetEmployeeByRoleRequest) returns (GetEmployeeListResponse);
     rpc CreateEmployee(CreateEmployeeRequest) returns (CreateEmployeeResponse);
 }
